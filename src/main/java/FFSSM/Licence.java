@@ -46,14 +46,23 @@ public class Licence {
     }
 
     /**
-     * Est-ce que la licence est valide à la date indiquée ?
-     * Une licence est valide pendant un an à compter de sa date de délivrance
+     * Est-ce que la licence est valide à la date indiquée ? Une licence est
+     * valide pendant un an à compter de sa date de délivrance
+     *
      * @param d la date à tester
      * @return vrai si valide à la date d
-     **/
+     *
+     */
     public boolean estValide(Calendar d) {
-         // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        Calendar cal = (Calendar) delivrance.clone();
+        cal.add(Calendar.YEAR, 1);
+
+        if (cal.after(d)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

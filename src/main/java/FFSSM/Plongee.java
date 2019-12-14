@@ -4,47 +4,58 @@
 package FFSSM;
 
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class Plongee {
 
-	public Site lieu;
+    public Site lieu;
 
-	public Moniteur chefDePalanquee;
+    public Moniteur chefDePalanquee;
 
-	public Calendar date;
+    public Calendar date;
 
-	public int profondeur;
+    public int profondeur;
 
-	public int duree;
+    public int duree;
 
-	public Plongee(Site lieu, Moniteur chefDePalanquee, Calendar date, int profondeur, int duree) {
-		this.lieu = lieu;
-		this.chefDePalanquee = chefDePalanquee;
-		this.date = date;
-		this.profondeur = profondeur;
-		this.duree = duree;
-	}
+    public ArrayList<Plongeur> Plongeurs = new ArrayList<Plongeur>();
 
-	public void ajouteParticipant(Plongeur participant) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
-	}
+    public Plongee(Site lieu, Moniteur chefDePalanquee, Calendar date, int profondeur, int duree) {
+        this.lieu = lieu;
+        this.chefDePalanquee = chefDePalanquee;
+        this.date = date;
+        this.profondeur = profondeur;
+        this.duree = duree;
+    }
 
-	public Calendar getDate() {
-		return date;
-	}
+    public void ajouteParticipant(Plongeur participant) {
+        Plongeurs.add(participant);
 
-	/**
-	 * Détermine si la plongée est conforme. 
-	 * Une plongée est conforme si tous les plongeurs de la palanquée ont une
-	 * licence valide à la date de la plongée
-	 * @return vrai si la plongée est conforme
-	 */
-	public boolean estConforme() {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
-	}
+    }
 
+    public Calendar getDate() {
+        return date;
+    }
+
+    /**
+     * Détermine si la plongée est conforme. Une plongée est conforme si tous
+     * les plongeurs de la palanquée ont une licence valide à la date de la
+     * plongée
+     *
+     * @return vrai si la plongée est conforme
+     */
+    public boolean estConforme() {
+        int a = 0;
+        for (Plongeur P : Plongeurs) {
+            boolean b = P.dernierLicence().estValide(date);
+            if (b == false) {
+                a = a + 1;
+            }
+        }
+        if (a == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
